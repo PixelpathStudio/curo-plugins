@@ -1,0 +1,30 @@
+{
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+	"name": "curo",
+	"version": "0.2.1",
+	"description": "Connects your Curo learning account: save what you want to learn, see your Curo plan, play a task's podcast and continue lessons.",
+	"author": { "name": "Curo", "url": "https://curohq.com" },
+	"homepage": "https://curohq.com",
+	"license": "MIT",
+	"keywords": ["learning", "study plan", "podcast", "goals"],
+	"extensions": {
+		"com.openai": {
+			"interface": {
+				"displayName": "Curo",
+				"shortDescription": "Your Curo learning plan",
+				"longDescription": "Curo plans what you learn each day from your goals and your work. Ask what's on your plan today, save something you want to learn as a Curo goal, play a task's podcast, or continue where you left off. Lessons open in Curo.",
+				"developerName": "Curo",
+				"category": "Education & Research",
+				"capabilities": ["Read", "Write"],
+				"websiteURL": "https://curohq.com",
+				"privacyPolicyURL": "https://curohq.com/privacy",
+				"supportURL": "https://curohq.com/contact",
+				"termsOfServiceURL": "https://curohq.com/terms",
+				"defaultPrompt": ["What's on my Curo plan today?", "Save a Curo goal: learn Rust properly", "Play my Curo podcast"],
+				"brandColor": "#EE6F2D",
+				"composerIcon": "./assets/icon.png",
+				"logo": "./assets/logo.png"
+			}
+		}
+	}
+}

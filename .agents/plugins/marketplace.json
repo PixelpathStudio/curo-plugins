@@ -1,0 +1,20 @@
+{
+	"name": "curo-plugins",
+	"interface": {
+		"displayName": "Curo"
+	},
+	"plugins": [
+		{
+			"name": "curo",
+			"source": {
+				"source": "local",
+				"path": "./curo"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Education & Research"
+		}
+	]
+}

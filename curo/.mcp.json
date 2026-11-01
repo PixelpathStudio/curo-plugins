@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"curo": {
+			"type": "http",
+			"url": "https://prodapi.curohq.com/mcp"
+		}
+	}
+}
