@@ -1,7 +1,7 @@
 {
 	"name": "curo",
 	"displayName": "Curo",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"description": "Connects your Curo learning account: save what you want to learn, see your Curo plan, play a task's podcast and continue lessons from Claude.",
 	"author": { "name": "Curo", "url": "https://curohq.com" },
 	"homepage": "https://curohq.com",
