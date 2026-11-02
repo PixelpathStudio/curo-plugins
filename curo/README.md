@@ -24,7 +24,7 @@ After you install the plugin, connect Curo once and sign in with your Curo accou
 - "Play my Curo podcast for …" plays a task's podcast in the chat and remembers where you stopped.
 - "Save a Curo goal: learn Rust properly" saves a learning goal. A goal written from the conversation is shown to you first and saved only after you approve it.
 - "What should I learn next?" gives the lesson to continue, with a link that opens it in Curo.
-- "Turn on Curo activity" (Claude Code) lets your plan follow what you work on; see Data.
+- "Turn on Curo activity" (Claude Code and ChatGPT desktop) lets your plan follow what you work on; see Data.
 
 The plugin has one skill, `curo`, which tells the assistant when to use Curo and how: it never invents a plan, never saves a goal you didn't ask for, and suggests saving a goal at most once per conversation (say "stop suggesting Curo" to turn that off).
 
