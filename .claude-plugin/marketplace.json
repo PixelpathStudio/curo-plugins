@@ -6,14 +6,14 @@
 	},
 	"metadata": {
 		"description": "Connects your Curo learning account: save what you want to learn, see your Curo plan, play a task's podcast and continue lessons from Claude.",
-		"version": "0.3.3"
+		"version": "0.3.4"
 	},
 	"plugins": [
 		{
 			"name": "curo",
 			"source": "./curo",
 			"description": "Connects your Curo learning account: save what you want to learn, see your Curo plan, play a task's podcast and continue lessons from Claude.",
-			"version": "0.3.3"
+			"version": "0.3.4"
 		}
 	]
 }

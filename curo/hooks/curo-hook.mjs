@@ -26,6 +26,8 @@
 //     UserPromptSubmit hook's stdout to the conversation.
 //   - Exit 0 on every error (missing token, no git, no network, bad input).
 //   - Never send a path or a folder name: the repo comes only from a remote.
+//   - Never read a credential from the environment: the only key is the
+//     token file under ~/.config/curo/, which pairing (or the person) writes.
 
 import { execFileSync, spawn } from "node:child_process";
 import { chmodSync, mkdirSync, readFileSync, realpathSync, unlinkSync, writeFileSync } from "node:fs";
@@ -231,18 +233,22 @@ function readConfigFile(home, name) {
 }
 
 /**
- * The API base. A token travels with its Gateway: a paired token (in the file)
- * goes to the Gateway that issued it (api-url), whatever CURO_API_URL says.
- * Otherwise CURO_API_URL, else the public Gateway.
+ * The API base. A token travels with its Gateway: once pairing has saved the
+ * issuing Gateway (api-url), the token goes there, whatever CURO_API_URL says.
+ * Without an api-url file, CURO_API_URL, else the public Gateway.
  */
 export function apiUrlOf(env, home = "") {
-	const paired = !env.CURO_AGENT_TOKEN?.trim() && home ? readConfigFile(home, "api-url") : "";
+	const paired = home ? readConfigFile(home, "api-url") : "";
 	return paired || env.CURO_API_URL?.trim() || DEFAULT_API_URL;
 }
 
-/** CURO_AGENT_TOKEN, else ~/.config/curo/agent-token, else "". */
-export function readToken(env, home) {
-	return env.CURO_AGENT_TOKEN?.trim() || readConfigFile(home, "agent-token");
+/**
+ * The hook's key: ~/.config/curo/agent-token, which pairing writes (or a person
+ * puts there by hand), else "". Never a token from the environment: the hook
+ * sends no credential it didn't get for itself.
+ */
+export function readToken(home) {
+	return readConfigFile(home, "agent-token");
 }
 
 /** A Gateway the hook may hand a token to: https, or plain http only on this machine (a local Gateway). */
@@ -294,12 +300,12 @@ export function dropPairing(home, code) {
 }
 
 /**
- * The token a pairing may name for revoking: only the token file's (never
- * CURO_AGENT_TOKEN, which would stay in use), and only when it belongs to the
- * Gateway the pairing goes to, so a token is never handed to another host.
+ * The token a pairing may name for revoking: the token file's, and only when
+ * it belongs to the Gateway the pairing goes to, so a token is never handed to
+ * another host.
  */
 export function replaceableToken(env, home, pairing) {
-	if (!pairing || env.CURO_AGENT_TOKEN?.trim()) return "";
+	if (!pairing) return "";
 	const token = readConfigFile(home, "agent-token");
 	return token && apiUrlOf(env, home).replace(/\/+$/, "") === pairing.apiUrl ? token : "";
 }
@@ -402,7 +408,7 @@ export function main(argv = process.argv.slice(2), env = process.env) {
 		}
 		const tool = toolOf(argv[0], env);
 		const home = homedir();
-		const token = readToken(env, home);
+		const token = readToken(home);
 		const pairing = readPairing(home);
 		const url = apiUrlOf(env, home);
 		// Nothing is ever sent without a token, or a pairing that gets one.
