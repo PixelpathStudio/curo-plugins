@@ -3,12 +3,7 @@
 	"mcpServers": {
 		"curo": {
 			"type": "streamable-http",
-			"url": "https://prodapi.curohq.com/mcp",
-			"extensions": {
-				"com.openai": {
-					"auth": { "type": "oauth" }
-				}
-			}
+			"url": "https://prodapi.curohq.com/mcp"
 		}
 	}
 }

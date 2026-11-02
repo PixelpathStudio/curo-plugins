@@ -1,7 +1,7 @@
 {
 	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
 	"name": "curo",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Connects your Curo learning account: save what you want to learn, see your Curo plan, play a task's podcast and continue lessons.",
 	"author": { "name": "Curo", "url": "https://curohq.com" },
 	"homepage": "https://curohq.com",
