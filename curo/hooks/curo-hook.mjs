@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 // Curo agent hook for Claude Code and Codex. Node >= 18, no dependencies.
 //
-//   node curo-hook.mjs claude_code   (or: codex)      hook JSON on stdin
+//   node curo-hook.mjs claude_code   (or: codex, or auto)      hook JSON on stdin
+//
+// "auto" is for a plugin's hooks, shared by both hosts: Codex sets PLUGIN_ROOT
+// for plugin hooks, Claude Code sets only CLAUDE_PLUGIN_ROOT.
 //
 // It sends a small session signal to Curo from a detached child process and
 // exits 0 at once.
@@ -385,13 +388,19 @@ function startDetachedPost({ url, token, body, pairing, home, replaces }) {
 	});
 }
 
+/** The tool a hook runs under: an explicit name, or for "auto" the host that set PLUGIN_ROOT (Codex) or not (Claude Code). */
+export function toolOf(arg, env) {
+	if (arg !== "auto") return arg;
+	return env.PLUGIN_ROOT ? "codex" : "claude_code";
+}
+
 export function main(argv = process.argv.slice(2), env = process.env) {
 	try {
 		if (argv[0] === "--post") {
 			deliverSignalFromStdin().finally(() => process.exit(0));
 			return;
 		}
-		const tool = argv[0];
+		const tool = toolOf(argv[0], env);
 		const home = homedir();
 		const token = readToken(env, home);
 		const pairing = readPairing(home);

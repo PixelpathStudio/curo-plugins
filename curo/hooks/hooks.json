@@ -5,7 +5,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "command -v node >/dev/null 2>&1 && node \"${CLAUDE_PLUGIN_ROOT}/hooks/curo-hook.mjs\" claude_code 2>/dev/null; exit 0",
+						"command": "command -v node >/dev/null 2>&1 && node \"${CLAUDE_PLUGIN_ROOT}/hooks/curo-hook.mjs\" auto 2>/dev/null; exit 0",
 						"async": true
 					}
 				]
@@ -16,7 +16,7 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "command -v node >/dev/null 2>&1 && node \"${CLAUDE_PLUGIN_ROOT}/hooks/curo-hook.mjs\" claude_code 2>/dev/null; exit 0",
+						"command": "command -v node >/dev/null 2>&1 && node \"${CLAUDE_PLUGIN_ROOT}/hooks/curo-hook.mjs\" auto 2>/dev/null; exit 0",
 						"async": true
 					}
 				]
